@@ -105,17 +105,18 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 0;
+    padding: 16px 0;
     border-bottom: 1px solid #f0f0f0;
 }
 
 .domain-name {
     font-weight: 600;
     color: #1a1a1a;
+    font-size: 18px;
 }
 
 .domain-tag {
-    padding: 4px 12px;
+    padding: 6px 14px;
     border-radius: 12px;
     font-size: 12px;
     font-weight: 600;
@@ -128,8 +129,35 @@ body {
 }
 
 .domain-tag.premium {
-    background: #ffd700;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
     color: #8b6914;
+}
+
+/* Domain Highlights */
+.domain-highlights {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.highlight-icon {
+    font-size: 16px;
+}
+
+.highlight-item span:last-child {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
 }
 
 #saleForm {
@@ -1290,6 +1318,148 @@ tr:hover {
     color: rgba(255, 255, 255, 0.8);
 }
 
+/* Single Domain Showcase */
+.single-domain-showcase {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.domain-featured-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 48px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.domain-sale-icon {
+    font-size: 4rem;
+    margin-bottom: 24px;
+}
+
+.domain-featured-card h3 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ffd700;
+}
+
+.domain-description {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+}
+
+/* Domain Value Props */
+.domain-value-props {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.value-prop {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    text-align: left;
+}
+
+.value-icon {
+    font-size: 1.5rem;
+    margin-top: 4px;
+}
+
+.value-content strong {
+    display: block;
+    color: #ffd700;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.value-content p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Domain CTA */
+.domain-cta-section {
+    padding: 32px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-domain-inquiry.featured {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #1a1a1a;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-bottom: 16px;
+}
+
+.btn-domain-inquiry.featured:hover {
+    transform: translateY(-3px);
+}
+
+.domain-note {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Ideal Buyers */
+.ideal-buyers {
+    margin-top: 60px;
+}
+
+.ideal-buyers h3 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 32px;
+    color: #ffd700;
+}
+
+.buyer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+}
+
+.buyer-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+}
+
+.buyer-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+}
+
+.buyer-card h4 {
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #ffd700;
+}
+
+.buyer-card p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Domain Sale Cards (Legacy) */
 .domains-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1316,11 +1486,6 @@ tr:hover {
 .domain-sale-card.featured {
     border-color: #ffd700;
     background: rgba(255, 215, 0, 0.1);
-}
-
-.domain-sale-icon {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
 }
 
 .domain-sale-card h3 {
@@ -1500,6 +1665,10 @@ tr:hover {
     .section {
         padding: 60px 0;
     }
+
+    .domain-value-props {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
@@ -1552,6 +1721,28 @@ tr:hover {
         margin: 20px;
     }
     
+    .domain-value-props {
+        grid-template-columns: 1fr;
+    }
+
+    .buyer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .highlight-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 4px;
+    }
+
+    .domain-featured-card {
+        padding: 32px 24px;
+    }
+
+    .domain-featured-card h3 {
+        font-size: 2rem;
+    }
+
     .domains-grid {
         grid-template-columns: 1fr;
     }
@@ -1582,5 +1773,9 @@ tr:hover {
     .popup-box {
         margin: 16px;
         max-height: 95vh;
+    }
+
+    .highlight-item {
+        padding: 8px;
     }
 }

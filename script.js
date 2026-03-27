@@ -4,6 +4,12 @@ function openPopup() {
     generateCaptcha();
     // Prevent body scroll when popup is open
     document.body.style.overflow = 'hidden';
+    
+    // Focus management
+    lastFocusedElement = document.activeElement;
+    setTimeout(() => {
+        document.getElementById('popupName').focus();
+    }, 100);
 }
 
 function closePopup() {
@@ -13,6 +19,11 @@ function closePopup() {
     document.getElementById('saleForm').reset();
     // Restore body scroll
     document.body.style.overflow = 'auto';
+    
+    // Return focus to previously focused element
+    if (lastFocusedElement) {
+        lastFocusedElement.focus();
+    }
 }
 
 // Close popup when clicking outside
@@ -79,6 +90,7 @@ async function submitSaleForm(e) {
                 email: email,
                 phone: phone,
                 message: message,
+                domain: 'BotoxTechniques.com',
                 source: 'BotoxTechniques Domain Inquiry'
             })
         });
@@ -164,7 +176,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for animation
-const animatedElements = document.querySelectorAll('.overview-card, .product-card, .technique-card, .safety-card, .study-card, .training-card, .testimonial-card, .partner-card, .domain-sale-card');
+const animatedElements = document.querySelectorAll('.overview-card, .product-card, .technique-card, .safety-card, .study-card, .training-card, .testimonial-card, .partner-card, .domain-sale-card, .domain-featured-card');
 
 animatedElements.forEach(el => {
     el.style.opacity = '0';
@@ -294,6 +306,8 @@ window.addEventListener('error', (e) => {
 // ACCESSIBILITY IMPROVEMENTS
 
 // Keyboard navigation for popup
+let lastFocusedElement;
+
 document.addEventListener('keydown', (e) => {
     if (document.getElementById('salePopup').classList.contains('active')) {
         if (e.key === 'Tab') {
@@ -317,32 +331,4 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Focus management
-let lastFocusedElement;
-
-function openPopup() {
-    lastFocusedElement = document.activeElement;
-    document.getElementById('salePopup').classList.add('active');
-    generateCaptcha();
-    document.body.style.overflow = 'hidden';
-    
-    // Focus first input
-    setTimeout(() => {
-        document.getElementById('popupName').focus();
-    }, 100);
-}
-
-function closePopup() {
-    document.getElementById('salePopup').classList.remove('active');
-    document.getElementById('formSuccess').style.display = 'none';
-    document.getElementById('formError').style.display = 'none';
-    document.getElementById('saleForm').reset();
-    document.body.style.overflow = 'auto';
-    
-    // Return focus to previously focused element
-    if (lastFocusedElement) {
-        lastFocusedElement.focus();
-    }
-}
-
-console.log('BotoxTechniques.com - Advanced Medical Education Platform Loaded Successfully');
+console.log('BotoxTechniques.com - Single Premium Domain Now Available for Purchase');
