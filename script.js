@@ -1,414 +1,450 @@
-// Mobile Navigation
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
+// ===== BOTOX TECHNIQUES WEBSITE JAVASCRIPT =====
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all functionality
+    initializeNavigation();
+    initializeResearchTabs();
+    initializeScrollEffects();
+    initializeMobileMenu();
+    initializeAnimations();
 });
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navMenu.classList.remove('active');
-}));
-
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
-
-// Cost Calculator
-const treatmentArea = document.getElementById('treatment-area');
-const locationType = document.getElementById('location-type');
-const providerType = document.getElementById('provider-type');
-
-// Pricing multipliers based on location and provider type
-const locationMultipliers = {
-    urban: 1.3,
-    suburban: 1.0,
-    rural: 0.8
-};
-
-const providerMultipliers = {
-    premium: 1.4,
-    standard: 1.0,
-    value: 0.7
-};
-
-// Base prices per unit (2024 averages)
-const basePrices = {
-    botox: 16,
-    dysport: 6,
-    xeomin: 13.5,
-    jeuveau: 12
-};
-
-function calculateCosts() {
-    const selectedArea = treatmentArea.options[treatmentArea.selectedIndex];
-    const locationMult = locationMultipliers[locationType.value];
-    const providerMult = providerMultipliers[providerType.value];
+// ===== NAVIGATION =====
+function initializeNavigation() {
+    // Smooth scrolling for navigation links
+    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
     
-    const units = {
-        botox: parseInt(selectedArea.dataset.unitsBotox),
-        dysport: parseInt(selectedArea.dataset.unitsDysport),
-        xeomin: parseInt(selectedArea.dataset.unitsXeomin),
-        jeuveau: parseInt(selectedArea.dataset.unitsJeuveau)
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                const headerOffset = 100;
+                const elementPosition = targetSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Update active nav link
+                updateActiveNavLink(link);
+            }
+        });
+    });
+}
+
+function updateActiveNavLink(activeLink) {
+    // Remove active class from all nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Add active class to clicked link
+    activeLink.classList.add('active');
+}
+
+// ===== MOBILE MENU =====
+function initializeMobileMenu() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+            
+            // Animate hamburger menu
+            const spans = navToggle.querySelectorAll('span');
+            spans.forEach((span, index) => {
+                if (navToggle.classList.contains('active')) {
+                    if (index === 0) span.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    if (index === 1) span.style.opacity = '0';
+                    if (index === 2) span.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                } else {
+                    span.style.transform = '';
+                    span.style.opacity = '';
+                }
+            });
+        });
+        
+        // Close mobile menu when clicking on nav links
+        const mobileNavLinks = navMenu.querySelectorAll('.nav-link');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+                
+                // Reset hamburger menu
+                const spans = navToggle.querySelectorAll('span');
+                spans.forEach(span => {
+                    span.style.transform = '';
+                    span.style.opacity = '';
+                });
+            });
+        });
+    }
+}
+
+// ===== RESEARCH TABS =====
+function initializeResearchTabs() {
+    const researchTabs = document.querySelectorAll('.research-tab');
+    const researchPanels = document.querySelectorAll('.research-panel');
+    
+    researchTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const targetPanel = this.dataset.tab;
+            
+            // Remove active class from all tabs and panels
+            researchTabs.forEach(t => t.classList.remove('active'));
+            researchPanels.forEach(p => p.classList.remove('active'));
+            
+            // Add active class to clicked tab and corresponding panel
+            this.classList.add('active');
+            document.getElementById(targetPanel + '-panel').classList.add('active');
+        });
+    });
+}
+
+// ===== SCROLL EFFECTS =====
+function initializeScrollEffects() {
+    // Header background on scroll
+    const header = document.querySelector('.header');
+    
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.98)';
+            header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        } else {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.boxShadow = 'none';
+        }
+    });
+    
+    // Intersection Observer for animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     };
     
-    // Calculate costs for each product
-    Object.keys(units).forEach(product => {
-        const pricePerUnit = basePrices[product] * locationMult * providerMult;
-        const totalCost = units[product] * pricePerUnit;
-        
-        const costElement = document.getElementById(`${product}-cost`);
-        const detailsElement = document.getElementById(`${product}-details`);
-        
-        costElement.textContent = `$${Math.round(totalCost)}`;
-        detailsElement.textContent = `${units[product]} units × $${pricePerUnit.toFixed(0)}`;
-    });
-}
-
-// Add event listeners for calculator
-if (treatmentArea && locationType && providerType) {
-    treatmentArea.addEventListener('change', calculateCosts);
-    locationType.addEventListener('change', calculateCosts);
-    providerType.addEventListener('change', calculateCosts);
-    
-    // Initial calculation
-    calculateCosts();
-}
-
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-            
-            // Add staggered animation for cards
-            if (entry.target.classList.contains('stats-grid')) {
-                const cards = entry.target.querySelectorAll('.stat-item');
-                cards.forEach((card, index) => {
-                    setTimeout(() => {
-                        card.style.animation = `fadeInUp 0.6s ease ${index * 0.1}s both`;
-                    }, index * 100);
-                });
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
             }
-            
-            if (entry.target.classList.contains('product-cards')) {
-                const cards = entry.target.querySelectorAll('.product-card');
-                cards.forEach((card, index) => {
-                    setTimeout(() => {
-                        card.style.animation = `fadeInUp 0.6s ease ${index * 0.1}s both`;
-                    }, index * 150);
-                });
-            }
-            
-            if (entry.target.classList.contains('timeline-item')) {
-                const isEven = Array.from(entry.target.parentNode.children).indexOf(entry.target) % 2 === 1;
-                entry.target.classList.add(isEven ? 'slide-in-right' : 'slide-in-left');
-            }
-        }
-    });
-}, observerOptions);
-
-// Observe elements for animation
-document.querySelectorAll('.stats-grid, .product-cards, .timeline-item, .safety-card, .comparison-table-container').forEach(el => {
-    observer.observe(el);
-});
-
-// Form handling for domain inquiry
-const inquiryForm = document.querySelector('.inquiry-form');
-if (inquiryForm) {
-    inquiryForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(this);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const company = formData.get('company');
-        const message = formData.get('message');
-        
-        // Create mailto link
-        const subject = encodeURIComponent('BotoxTechniques.com Domain Inquiry');
-        const body = encodeURIComponent(
-            `Name: ${name}\n` +
-            `Email: ${email}\n` +
-            `Company: ${company || 'Not provided'}\n\n` +
-            `Message:\n${message}`
-        );
-        
-        const mailtoLink = `mailto:domain@botoxtechniques.com?subject=${subject}&body=${body}`;
-        
-        // Open email client
-        window.location.href = mailtoLink;
-        
-        // Show success message
-        const button = this.querySelector('button[type="submit"]');
-        const originalText = button.textContent;
-        button.textContent = 'Email Client Opened!';
-        button.style.background = '#10b981';
-        
-        setTimeout(() => {
-            button.textContent = originalText;
-            button.style.background = '';
-        }, 3000);
-    });
+        });
+    }, observerOptions);
+    
+    // Observe elements for animations
+    const animatedElements = document.querySelectorAll('.overview-card, .product-card, .technique-card, .safety-card, .study-card, .training-card');
+    animatedElements.forEach(el => observer.observe(el));
 }
 
-// Add hover effects to comparison table rows
-const tableRows = document.querySelectorAll('.comparison-table tbody tr');
-tableRows.forEach(row => {
-    row.addEventListener('mouseenter', () => {
-        row.style.backgroundColor = '#f8fafc';
-        row.style.transform = 'scale(1.01)';
-        row.style.transition = 'all 0.2s ease';
-    });
-    
-    row.addEventListener('mouseleave', () => {
-        row.style.backgroundColor = '';
-        row.style.transform = '';
-    });
-});
-
-// Parallax effect for hero background
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const parallax = document.querySelector('.hero-background');
-    if (parallax) {
-        const speed = scrolled * 0.5;
-        parallax.style.transform = `translateY(${speed}px)`;
-    }
-});
-
-// Add typing animation to hero title
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    type();
-}
-
-// Initialize typing animation on page load
-window.addEventListener('load', () => {
-    const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        setTimeout(() => {
-            // Start typing animation after a brief delay
-            typeWriter(heroTitle, originalText, 80);
-        }, 1000);
-    }
-});
-
-// Add smooth reveal animation for sections
-function revealOnScroll() {
-    const reveals = document.querySelectorAll('.section-title, .section-subtitle');
-    
-    reveals.forEach(element => {
-        const windowHeight = window.innerHeight;
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
-        
-        if (elementTop < windowHeight - elementVisible) {
-            element.classList.add('fade-in');
-        }
-    });
-}
-
-window.addEventListener('scroll', revealOnScroll);
-
-// Add click animation to buttons
-document.querySelectorAll('.btn').forEach(button => {
-    button.addEventListener('click', function(e) {
-        // Create ripple effect
-        const ripple = document.createElement('span');
-        ripple.classList.add('ripple');
-        
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        
-        this.appendChild(ripple);
-        
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
-    });
-});
-
-// Add CSS for ripple effect
-const style = document.createElement('style');
-style.textContent = `
-    .btn {
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.6);
-        transform: scale(0);
-        animation: ripple-animation 0.6s linear;
-        pointer-events: none;
-    }
-    
-    @keyframes ripple-animation {
-        to {
-            transform: scale(4);
+// ===== ANIMATIONS =====
+function initializeAnimations() {
+    // Add CSS for scroll animations
+    const style = document.createElement('style');
+    style.textContent = `
+        .overview-card, .product-card, .technique-card, .safety-card, .study-card, .training-card {
             opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
+        
+        .overview-card.animate, .product-card.animate, .technique-card.animate, 
+        .safety-card.animate, .study-card.animate, .training-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Stagger animations */
+        .overview-card:nth-child(1) { transition-delay: 0.1s; }
+        .overview-card:nth-child(2) { transition-delay: 0.2s; }
+        .overview-card:nth-child(3) { transition-delay: 0.3s; }
+        .overview-card:nth-child(4) { transition-delay: 0.4s; }
+        
+        .product-card:nth-child(1) { transition-delay: 0.1s; }
+        .product-card:nth-child(2) { transition-delay: 0.2s; }
+        .product-card:nth-child(3) { transition-delay: 0.3s; }
+        .product-card:nth-child(4) { transition-delay: 0.4s; }
+        .product-card:nth-child(5) { transition-delay: 0.5s; }
+        
+        /* Mobile menu styles */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 1rem 0;
+            }
+            
+            .nav-link {
+                font-size: 1.2rem;
+                padding: 1rem 2rem;
+                border-radius: 0.5rem;
+                transition: background-color 0.3s ease;
+            }
+            
+            .nav-link:hover {
+                background-color: rgba(74, 158, 187, 0.1);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// ===== UTILITY FUNCTIONS =====
+
+// Debounce function for scroll events
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Add smooth reveal animation for cards
+function revealCards() {
+    const cards = document.querySelectorAll('.overview-card, .product-card, .technique-card, .safety-card');
+    cards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+}
+
+// Add loading animation for molecular structure
+function animateMolecularStructure() {
+    const molecules = document.querySelectorAll('.molecule');
+    molecules.forEach((molecule, index) => {
+        molecule.style.animationDelay = `${index * 0.5}s`;
+        molecule.style.opacity = '0';
+        
+        setTimeout(() => {
+            molecule.style.opacity = '0.8';
+        }, index * 500);
+    });
+}
+
+// Initialize molecular animation when page loads
+window.addEventListener('load', animateMolecularStructure);
+
+// ===== TABLE ENHANCEMENTS =====
+function enhanceTable() {
+    const table = document.querySelector('table');
+    if (table) {
+        // Add hover effects to table rows
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = 'var(--neutral-100)';
+                this.style.transform = 'scale(1.01)';
+            });
+            
+            row.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '';
+                this.style.transform = '';
+            });
+        });
     }
-`;
-document.head.appendChild(style);
+}
 
-// Add progress indicator for reading
-const progressBar = document.createElement('div');
-progressBar.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    z-index: 1001;
-    transition: width 0.2s ease;
-`;
-document.body.appendChild(progressBar);
+// Call table enhancement after DOM is loaded
+document.addEventListener('DOMContentLoaded', enhanceTable);
 
-window.addEventListener('scroll', () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    progressBar.style.width = scrolled + '%';
-});
+// ===== KEYBOARD NAVIGATION =====
+function initializeKeyboardNavigation() {
+    // Tab key navigation for research tabs
+    const researchTabs = document.querySelectorAll('.research-tab');
+    
+    researchTabs.forEach((tab, index) => {
+        tab.setAttribute('tabindex', '0');
+        tab.setAttribute('role', 'tab');
+        
+        tab.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                tab.click();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                const nextTab = researchTabs[(index + 1) % researchTabs.length];
+                nextTab.focus();
+                nextTab.click();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                const prevTab = researchTabs[(index - 1 + researchTabs.length) % researchTabs.length];
+                prevTab.focus();
+                prevTab.click();
+            }
+        });
+    });
+}
 
-// Add search functionality (basic)
-function addSearchFunctionality() {
-    const searchInput = document.createElement('input');
-    searchInput.type = 'text';
-    searchInput.placeholder = 'Search content...';
-    searchInput.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 10px;
-        border: 2px solid #e2e8f0;
-        border-radius: 25px;
-        background: white;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
+// Initialize keyboard navigation
+document.addEventListener('DOMContentLoaded', initializeKeyboardNavigation);
+
+// ===== PERFORMANCE OPTIMIZATIONS =====
+
+// Lazy load images (if any are added later)
+function lazyLoadImages() {
+    const images = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
+                observer.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+}
+
+// Initialize lazy loading
+document.addEventListener('DOMContentLoaded', lazyLoadImages);
+
+// ===== SCROLL TO TOP FUNCTIONALITY =====
+function initializeScrollToTop() {
+    // Create scroll to top button
+    const scrollButton = document.createElement('button');
+    scrollButton.innerHTML = '↑';
+    scrollButton.className = 'scroll-to-top';
+    scrollButton.setAttribute('aria-label', 'Scroll to top');
+    
+    // Add styles
+    const scrollButtonStyles = `
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-teal);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .scroll-to-top:hover {
+            background: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+        
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
     `;
     
-    document.body.appendChild(searchInput);
+    const style = document.createElement('style');
+    style.textContent = scrollButtonStyles;
+    document.head.appendChild(style);
+    document.body.appendChild(scrollButton);
     
-    // Toggle search with Ctrl+F or Cmd+F
-    document.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
-            e.preventDefault();
-            searchInput.style.opacity = '1';
-            searchInput.style.visibility = 'visible';
-            searchInput.focus();
+    // Show/hide scroll button based on scroll position
+    window.addEventListener('scroll', debounce(() => {
+        if (window.pageYOffset > 300) {
+            scrollButton.classList.add('visible');
+        } else {
+            scrollButton.classList.remove('visible');
         }
-        
-        if (e.key === 'Escape') {
-            searchInput.style.opacity = '0';
-            searchInput.style.visibility = 'hidden';
-            searchInput.value = '';
-            clearHighlights();
-        }
-    });
+    }, 100));
     
-    searchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        clearHighlights();
-        
-        if (searchTerm.length > 2) {
-            highlightText(searchTerm);
-        }
+    // Scroll to top when button is clicked
+    scrollButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 }
 
-function highlightText(searchTerm) {
-    const walker = document.createTreeWalker(
-        document.body,
-        NodeFilter.SHOW_TEXT,
-        null,
-        false
-    );
+// Initialize scroll to top
+document.addEventListener('DOMContentLoaded', initializeScrollToTop);
+
+// ===== ACCESSIBILITY ENHANCEMENTS =====
+function enhanceAccessibility() {
+    // Add ARIA labels to interactive elements
+    const interactiveElements = document.querySelectorAll('button, [role="tab"], [data-tab]');
     
-    const textNodes = [];
-    let node;
-    
-    while (node = walker.nextNode()) {
-        if (node.nodeValue.toLowerCase().includes(searchTerm)) {
-            textNodes.push(node);
+    interactiveElements.forEach(element => {
+        if (!element.getAttribute('aria-label') && !element.getAttribute('aria-labelledby')) {
+            const text = element.textContent.trim();
+            if (text) {
+                element.setAttribute('aria-label', text);
+            }
         }
+    });
+    
+    // Improve focus management for research tabs
+    const tabPanels = document.querySelectorAll('.research-panel');
+    tabPanels.forEach(panel => {
+        panel.setAttribute('role', 'tabpanel');
+        panel.setAttribute('tabindex', '0');
+    });
+}
+
+// Initialize accessibility enhancements
+document.addEventListener('DOMContentLoaded', enhanceAccessibility);
+
+// ===== ERROR HANDLING =====
+window.addEventListener('error', function(e) {
+    console.error('An error occurred:', e.error);
+    // In production, you might want to log this to an error reporting service
+});
+
+// ===== PROGRESSIVE ENHANCEMENT =====
+// Ensure the site works even if JavaScript fails
+document.documentElement.classList.add('js-enabled');
+
+// Add styles for JavaScript-enabled features
+const jsStyles = `
+    .js-enabled .nav-menu {
+        /* Styles that only apply when JS is working */
     }
     
-    textNodes.forEach(textNode => {
-        const parent = textNode.parentNode;
-        const text = textNode.nodeValue;
-        const regex = new RegExp(`(${searchTerm})`, 'gi');
-        const newHTML = text.replace(regex, '<mark style="background: yellow; padding: 2px;">$1</mark>');
-        
-        const span = document.createElement('span');
-        span.innerHTML = newHTML;
-        parent.replaceChild(span, textNode);
-    });
-}
+    .js-enabled .research-panel:not(.active) {
+        display: none;
+    }
+`;
 
-function clearHighlights() {
-    document.querySelectorAll('mark').forEach(mark => {
-        const parent = mark.parentNode;
-        parent.replaceChild(document.createTextNode(mark.textContent), mark);
-        parent.normalize();
-    });
-}
-
-// Initialize search functionality
-// addSearchFunctionality();
-
-console.log('BotoxTechniques.com - Comprehensive Botulinum Toxin Resource');
-console.log('Website loaded successfully with all interactive features.');
+const jsStyleElement = document.createElement('style');
+jsStyleElement.textContent = jsStyles;
+document.head.appendChild(jsStyleElement);
