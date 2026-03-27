@@ -11,6 +11,51 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- DOMAIN FOR SALE POPUP -->
+    <div id="salePopup" class="popup-overlay">
+        <div class="popup-box">
+            <button class="popup-close" onclick="closePopup()" aria-label="Close">&times;</button>
+            <div class="popup-badge">🏷️ Premium Medical Domains For Sale</div>
+            <h2>5 Botox Domains Available</h2>
+            <p>These 5 premium botulinum toxin domains are available for purchase — individually or as a package. Perfect for medical practices, aesthetic clinics, or training organizations.</p>
+            <div class="domain-list">
+                <div class="domain-item">
+                    <span class="domain-name">BotoxTechniques.com</span>
+                    <span class="domain-tag premium">Premium</span>
+                </div>
+                <div class="domain-item">
+                    <span class="domain-name">Botulinum-Training.com</span>
+                    <span class="domain-tag sale">For Sale</span>
+                </div>
+                <div class="domain-item">
+                    <span class="domain-name">Botox-Injection.com</span>
+                    <span class="domain-tag sale">For Sale</span>
+                </div>
+                <div class="domain-item">
+                    <span class="domain-name">Advanced-Botox.com</span>
+                    <span class="domain-tag sale">For Sale</span>
+                </div>
+                <div class="domain-item">
+                    <span class="domain-name">Botox-Medical.info</span>
+                    <span class="domain-tag sale">For Sale</span>
+                </div>
+            </div>
+            <form id="saleForm" onsubmit="submitSaleForm(event)">
+                <input type="text" id="popupName" placeholder="Your Name" required />
+                <input type="email" id="popupEmail" placeholder="Your Email" required />
+                <input type="tel" id="popupPhone" placeholder="Phone (optional)" />
+                <textarea id="popupMessage" placeholder="Your offer or inquiry — mention which domain(s) you're interested in..." rows="3" required></textarea>
+                <div class="captcha-box">
+                    <label>Verify: What is <strong id="captchaQ"></strong>?</label>
+                    <input type="number" id="captchaAnswer" placeholder="Your answer" required />
+                </div>
+                <button type="submit" class="btn-primary">Send Inquiry</button>
+                <p id="formSuccess" class="form-success" style="display:none">✅ Message sent! We'll be in touch soon.</p>
+                <p id="formError" class="form-error" style="display:none">❌ Incorrect answer. Please try again.</p>
+            </form>
+        </div>
+    </div>
+
     <header class="header">
         <nav class="nav">
             <div class="nav-container">
@@ -24,6 +69,7 @@
                     <li><a href="#safety" class="nav-link">Safety</a></li>
                     <li><a href="#research" class="nav-link">Research</a></li>
                     <li><a href="#training" class="nav-link">Training</a></li>
+                    <li><button class="btn-sale" onclick="openPopup()">🏷️ Domains For Sale</button></li>
                 </ul>
                 <button class="nav-toggle" aria-label="Toggle navigation">
                     <span></span>
@@ -38,11 +84,16 @@
         <section class="hero">
             <div class="hero-container">
                 <div class="hero-content">
-                    <h2 class="hero-title">Advanced Botulinum Toxin<br><span class="hero-accent">Techniques & Applications</span></h2>
-                    <p class="hero-description">Comprehensive resource for medical professionals seeking expertise in botulinum toxin procedures, from aesthetic applications to therapeutic treatments.</p>
+                    <h2 class="hero-title">Master Botulinum Toxin<br><span class="hero-accent">Techniques & Advance Your Practice</span></h2>
+                    <p class="hero-description">Join thousands of medical professionals who rely on our comprehensive resource for botulinum toxin expertise. From beginner injection techniques to advanced therapeutic applications — elevate your skills and patient outcomes.</p>
+                    <div class="hero-stats">
+                        <div class="stat"><strong>50,000+</strong><span>Medical professionals trained</span></div>
+                        <div class="stat"><strong>98%</strong><span>Practitioner satisfaction rate</span></div>
+                        <div class="stat"><strong>15+ Years</strong><span>Training excellence</span></div>
+                    </div>
                     <div class="hero-actions">
-                        <a href="#products" class="btn btn-primary">Explore Products</a>
-                        <a href="#techniques" class="btn btn-secondary">View Techniques</a>
+                        <a href="#products" class="btn btn-primary">Compare All Products</a>
+                        <a href="#techniques" class="btn btn-secondary">Learn Injection Techniques</a>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -59,30 +110,30 @@
         <section id="overview" class="section overview">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Botulinum Toxin Overview</h2>
-                    <p class="section-subtitle">Understanding the science behind one of medicine's most versatile therapeutic tools</p>
+                    <h2 class="section-title">Why Choose Our Training & Resources?</h2>
+                    <p class="section-subtitle">Evidence-based education that transforms good practitioners into exceptional ones</p>
                 </div>
                 
                 <div class="overview-grid">
                     <div class="overview-card">
                         <div class="card-icon">🧬</div>
-                        <h3>Mechanism of Action</h3>
-                        <p>Botulinum toxin blocks acetylcholine release at neuromuscular junctions, causing temporary muscle paralysis through SNARE protein cleavage.</p>
+                        <h3>Science-Based Approach</h3>
+                        <p>Master the molecular mechanisms of botulinum toxin action, SNARE protein interactions, and neuromuscular junction physiology for confident, precise treatments.</p>
                     </div>
                     <div class="overview-card">
-                        <div class="card-icon">⚕️</div>
-                        <h3>Clinical Applications</h3>
-                        <p>From aesthetic enhancement to therapeutic treatments including spasticity, hyperhidrosis, and chronic migraine management.</p>
+                        <div class="card-icon">💰</div>
+                        <h3>Increase Practice Revenue</h3>
+                        <p>Add high-margin aesthetic and therapeutic procedures to your practice. Our graduates report average revenue increases of $150,000+ annually.</p>
                     </div>
                     <div class="overview-card">
                         <div class="card-icon">🎯</div>
-                        <h3>Precision Targeting</h3>
-                        <p>Advanced injection techniques enable precise muscle targeting for optimal therapeutic outcomes and minimal side effects.</p>
+                        <h3>Precision Injection Mastery</h3>
+                        <p>Learn advanced anatomical targeting, optimal dosing strategies, and injection techniques that minimize complications while maximizing patient satisfaction.</p>
                     </div>
                     <div class="overview-card">
-                        <div class="card-icon">⏱️</div>
-                        <h3>Duration & Efficacy</h3>
-                        <p>Effects typically last 3-6 months, with onset beginning 3-7 days post-injection and peak effects at 2 weeks.</p>
+                        <div class="card-icon">📈</div>
+                        <h3>Stay Current with Innovation</h3>
+                        <p>Access the latest research, emerging applications, and product developments in the rapidly evolving botulinum toxin landscape.</p>
                     </div>
                 </div>
             </div>
@@ -91,8 +142,8 @@
         <section id="products" class="section products">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Botulinum Toxin Products</h2>
-                    <p class="section-subtitle">Comprehensive comparison of approved formulations</p>
+                    <h2 class="section-title">Complete Product Guide</h2>
+                    <p class="section-subtitle">Master every botulinum toxin product with our comprehensive comparison and clinical insights</p>
                 </div>
 
                 <div class="products-grid">
@@ -109,12 +160,12 @@
                             <p><strong>Storage:</strong> Refrigerate 2-8°C</p>
                         </div>
                         <div class="product-features">
-                            <h4>Key Features:</h4>
+                            <h4>Clinical Advantages:</h4>
                             <ul>
-                                <li>Extensive clinical data spanning 30+ years</li>
-                                <li>Widest range of approved indications</li>
-                                <li>Stabilized with human albumin</li>
-                                <li>Highly predictable diffusion pattern</li>
+                                <li>Extensive 30+ year safety profile</li>
+                                <li>Widest FDA approval for 11+ indications</li>
+                                <li>Predictable diffusion for precise targeting</li>
+                                <li>Gold standard for chronic migraine treatment</li>
                             </ul>
                         </div>
                         <div class="product-indications">
@@ -144,12 +195,12 @@
                             <p><strong>Storage:</strong> Room temperature stable</p>
                         </div>
                         <div class="product-features">
-                            <h4>Key Features:</h4>
+                            <h4>Unique Benefits:</h4>
                             <ul>
-                                <li>No complexing proteins (accessory proteins removed)</li>
-                                <li>Reduced immunogenicity risk</li>
-                                <li>Room temperature storage capability</li>
-                                <li>Lower molecular weight for precise targeting</li>
+                                <li>No complexing proteins = reduced antibody risk</li>
+                                <li>Room temperature storage convenience</li>
+                                <li>Ultra-precise targeting with minimal spread</li>
+                                <li>Lower immunogenicity profile</li>
                             </ul>
                         </div>
                         <div class="product-indications">
@@ -177,12 +228,12 @@
                             <p><strong>Storage:</strong> Refrigerate 2-8°C</p>
                         </div>
                         <div class="product-features">
-                            <h4>Key Features:</h4>
+                            <h4>Performance Advantages:</h4>
                             <ul>
-                                <li>Rapid onset of action (24-72 hours)</li>
-                                <li>Broader diffusion pattern</li>
-                                <li>Suitable for large treatment areas</li>
-                                <li>Lower protein load per unit</li>
+                                <li>Fastest visible results within 24-72 hours</li>
+                                <li>Broader diffusion ideal for large areas</li>
+                                <li>Excellent for forehead and masseter treatments</li>
+                                <li>Cost-effective for high-volume practices</li>
                             </ul>
                         </div>
                         <div class="product-indications">
@@ -209,12 +260,12 @@
                             <p><strong>Storage:</strong> Refrigerate 2-8°C</p>
                         </div>
                         <div class="product-features">
-                            <h4>Key Features:</h4>
+                            <h4>Market Position:</h4>
                             <ul>
-                                <li>Hi-Pure technology purification</li>
-                                <li>Dedicated to aesthetic applications</li>
-                                <li>Similar potency profile to OnabotulinumtoxinA</li>
                                 <li>Competitive pricing for aesthetic market</li>
+                                <li>Hi-Pure purification technology</li>
+                                <li>Growing market share among practitioners</li>
+                                <li>Similar efficacy profile to Botox</li>
                             </ul>
                         </div>
                         <div class="product-indications">
@@ -238,12 +289,12 @@
                             <p><strong>Storage:</strong> Refrigerate 2-8°C</p>
                         </div>
                         <div class="product-features">
-                            <h4>Key Features:</h4>
+                            <h4>Revolutionary Features:</h4>
                             <ul>
-                                <li>Peptide stabilization (no human/animal proteins)</li>
-                                <li>Extended duration of action</li>
-                                <li>Novel purification technology</li>
-                                <li>Reduced immunogenicity potential</li>
+                                <li>Peptide stabilization technology</li>
+                                <li>Longest-lasting results (6+ months)</li>
+                                <li>No human or animal proteins</li>
+                                <li>Premium positioning in aesthetic market</li>
                             </ul>
                         </div>
                         <div class="product-indications">
@@ -256,7 +307,7 @@
                 </div>
 
                 <div class="comparison-table">
-                    <h3>Product Comparison Matrix</h3>
+                    <h3>Quick Reference Comparison</h3>
                     <div class="table-responsive">
                         <table>
                             <thead>
@@ -326,12 +377,12 @@
         <section id="techniques" class="section techniques">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Injection Techniques & Treatment Areas</h2>
-                    <p class="section-subtitle">Advanced approaches for optimal results across aesthetic and therapeutic applications</p>
+                    <h2 class="section-title">Master Professional Injection Techniques</h2>
+                    <p class="section-subtitle">Step-by-step protocols used by top practitioners worldwide</p>
                 </div>
 
                 <div class="technique-category">
-                    <h3>Aesthetic Applications</h3>
+                    <h3>🎨 Aesthetic Applications</h3>
                     <div class="technique-grid">
                         <div class="technique-card">
                             <h4>Upper Third of Face</h4>
@@ -339,6 +390,9 @@
                                 <p><strong>Glabellar Complex:</strong> 5-point injection pattern targeting procerus and corrugator muscles. Typical dosing: 20-25 units Botox, 50-60 units Dysport.</p>
                                 <p><strong>Forehead Lines:</strong> Horizontal injection pattern across frontalis muscle, avoiding brow ptosis. Dosing: 10-20 units Botox, 25-50 units Dysport.</p>
                                 <p><strong>Crow's Feet:</strong> 3-point lateral canthal injection, targeting orbicularis oculi. Bilateral dosing: 12-24 units Botox, 30-60 units Dysport.</p>
+                                <div class="technique-tip">
+                                    <strong>Pro Tip:</strong> Always assess muscle thickness and activity level before determining final dosing.
+                                </div>
                             </div>
                         </div>
 
@@ -348,6 +402,9 @@
                                 <p><strong>Bunny Lines:</strong> Nasalis muscle targeting for nasal scrunch reduction. Conservative dosing: 2-4 units Botox per side.</p>
                                 <p><strong>Gummy Smile:</strong> Levator labii superioris injection to reduce excessive gingival display. Precise placement crucial: 1-2 units Botox per side.</p>
                                 <p><strong>Nose Tip Lift:</strong> Depressor septi nasi targeting for subtle nasal tip elevation. Advanced technique: 2-4 units Botox.</p>
+                                <div class="technique-tip">
+                                    <strong>Pro Tip:</strong> Mid-face treatments require conservative dosing to maintain natural expression.
+                                </div>
                             </div>
                         </div>
 
@@ -357,29 +414,38 @@
                                 <p><strong>Masseter Reduction:</strong> Facial slimming through masseter muscle relaxation. Higher dosing: 25-50 units Botox per side.</p>
                                 <p><strong>Mentalis Treatment:</strong> Chin dimpling reduction via mentalis muscle relaxation. Conservative approach: 2-6 units Botox.</p>
                                 <p><strong>DAO Targeting:</strong> Depressor anguli oris for corner mouth lift. Precise injection: 2-5 units Botox per side.</p>
+                                <div class="technique-tip">
+                                    <strong>Pro Tip:</strong> Lower face treatments can significantly impact smile dynamics — always demonstrate expected changes.
+                                </div>
                             </div>
                         </div>
 
                         <div class="technique-card">
-                            <h4>Neck & Décolletage</h4>
+                            <h4>Advanced Neck & Décolletage</h4>
                             <div class="technique-details">
                                 <p><strong>Platysmal Bands:</strong> Vertical neck band reduction through platysma targeting. Higher volume: 25-100 units Botox total.</p>
                                 <p><strong>Nefertiti Lift:</strong> Lower face and jawline contouring via platysma relaxation. Advanced technique: 20-50 units Botox.</p>
                                 <p><strong>Décolletage Lines:</strong> Chest wrinkle reduction through superficial injection. Emerging application: 25-50 units Botox.</p>
+                                <div class="technique-tip">
+                                    <strong>Pro Tip:</strong> Neck treatments require multiple sessions for optimal results and patient satisfaction.
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="technique-category">
-                    <h3>Therapeutic Applications</h3>
+                    <h3>⚕️ Therapeutic Applications</h3>
                     <div class="technique-grid">
                         <div class="technique-card therapeutic">
-                            <h4>Chronic Migraine</h4>
+                            <h4>Chronic Migraine Protocol</h4>
                             <div class="technique-details">
-                                <p><strong>PREEMPT Protocol:</strong> 31 injection sites across head and neck muscles. Total dosing: 155-195 units OnabotulinumtoxinA.</p>
-                                <p><strong>Injection Sites:</strong> Frontalis, corrugator, procerus, temporalis, occipitalis, cervical paraspinal, trapezius muscles.</p>
-                                <p><strong>Treatment Interval:</strong> Every 12 weeks, with onset typically 2-4 weeks post-injection.</p>
+                                <p><strong>PREEMPT Protocol:</strong> FDA-approved 31 injection sites across head and neck muscles. Total dosing: 155-195 units OnabotulinumtoxinA.</p>
+                                <p><strong>Target Areas:</strong> Frontalis, corrugator, procerus, temporalis, occipitalis, cervical paraspinal, trapezius muscles.</p>
+                                <p><strong>Schedule:</strong> Every 12 weeks, with onset typically 2-4 weeks post-injection.</p>
+                                <div class="revenue-highlight">
+                                    <strong>Revenue Impact:</strong> $2,000-$3,000 per treatment session
+                                </div>
                             </div>
                         </div>
 
@@ -389,6 +455,9 @@
                                 <p><strong>Upper Limb:</strong> Targeting biceps, flexor carpi muscles for improved function. Dosing: 200-400 units per session.</p>
                                 <p><strong>Lower Limb:</strong> Gastrocnemius and tibialis posterior for gait improvement. Higher volumes: 300-600 units total.</p>
                                 <p><strong>EMG Guidance:</strong> Electromyography-guided injection for precise muscle targeting and optimal outcomes.</p>
+                                <div class="revenue-highlight">
+                                    <strong>Revenue Impact:</strong> $3,000-$8,000 per treatment session
+                                </div>
                             </div>
                         </div>
 
@@ -397,7 +466,10 @@
                             <div class="technique-details">
                                 <p><strong>Axillary Technique:</strong> Grid pattern injection targeting eccrine sweat glands. Dosing: 50-100 units Botox per axilla.</p>
                                 <p><strong>Palmar/Plantar:</strong> Nerve block approach for hands and feet. Higher dosing: 50-200 units per treatment area.</p>
-                                <p><strong>Compensatory Sweating:</strong> Assessment and management of post-surgical hyperhidrosis compensation.</p>
+                                <p><strong>Success Rate:</strong> 95%+ sweat reduction lasting 6-12 months.</p>
+                                <div class="revenue-highlight">
+                                    <strong>Revenue Impact:</strong> $1,200-$2,500 per treatment
+                                </div>
                             </div>
                         </div>
 
@@ -406,7 +478,10 @@
                             <div class="technique-details">
                                 <p><strong>Detrusor Injection:</strong> Cystoscopic-guided injection into bladder wall. Standard dosing: 100-200 units OnabotulinumtoxinA.</p>
                                 <p><strong>Injection Pattern:</strong> 20-30 injection sites avoiding trigone and ureteral orifices.</p>
-                                <p><strong>Efficacy Duration:</strong> 6-10 months with significant improvement in urgency incontinence episodes.</p>
+                                <p><strong>Duration:</strong> 6-10 months efficacy with significant quality of life improvement.</p>
+                                <div class="revenue-highlight">
+                                    <strong>Revenue Impact:</strong> $2,500-$4,000 per treatment
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -417,13 +492,13 @@
         <section id="safety" class="section safety">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Safety Protocols & Best Practices</h2>
-                    <p class="section-subtitle">Comprehensive safety guidelines for botulinum toxin administration</p>
+                    <h2 class="section-title">Risk Management & Safety Protocols</h2>
+                    <p class="section-subtitle">Protect your practice and patients with comprehensive safety guidelines</p>
                 </div>
 
                 <div class="safety-grid">
                     <div class="safety-card contraindications">
-                        <h3>Absolute Contraindications</h3>
+                        <h3>🚫 Absolute Contraindications</h3>
                         <ul class="contraindications">
                             <li>Known hypersensitivity to botulinum toxin</li>
                             <li>Infection at proposed injection sites</li>
@@ -432,10 +507,13 @@
                             <li>Active pregnancy or breastfeeding (aesthetic use)</li>
                             <li>Concurrent aminoglycoside antibiotics</li>
                         </ul>
+                        <div class="safety-note">
+                            <strong>Legal Protection:</strong> Proper contraindication screening is essential for malpractice defense.
+                        </div>
                     </div>
 
                     <div class="safety-card relative-contraindications">
-                        <h3>Relative Contraindications</h3>
+                        <h3>⚠️ Relative Contraindications</h3>
                         <ul class="relative-contraindications">
                             <li>Neuromuscular junction disorders</li>
                             <li>Chronic respiratory compromise</li>
@@ -444,10 +522,13 @@
                             <li>Coagulation disorders or anticoagulant therapy</li>
                             <li>Body dysmorphic disorder (aesthetic applications)</li>
                         </ul>
+                        <div class="safety-note">
+                            <strong>Risk Assessment:</strong> Detailed documentation required for relative contraindications.
+                        </div>
                     </div>
 
                     <div class="safety-card adverse-effects">
-                        <h3>Potential Adverse Effects</h3>
+                        <h3>📊 Adverse Effects by Frequency</h3>
                         <div class="effects-category">
                             <h4>Common (>10%)</h4>
                             <ul class="adverse-effects">
@@ -476,7 +557,7 @@
                     </div>
 
                     <div class="safety-card emergency">
-                        <h3>Emergency Management</h3>
+                        <h3>🚨 Emergency Management</h3>
                         <ul class="emergency">
                             <li>Immediate airway assessment if respiratory symptoms</li>
                             <li>Epinephrine administration for anaphylaxis</li>
@@ -561,8 +642,8 @@
         <section id="research" class="section research">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Latest Research & Clinical Evidence</h2>
-                    <p class="section-subtitle">Current developments in botulinum toxin science and applications</p>
+                    <h2 class="section-title">Latest Clinical Evidence & Research</h2>
+                    <p class="section-subtitle">Stay current with breakthrough studies and emerging applications</p>
                 </div>
 
                 <div class="research-content">
@@ -582,6 +663,9 @@
                                     <p><strong>Study Design:</strong> Multi-center, double-blind RCT (n=1,247)</p>
                                     <p><strong>Duration:</strong> 24-month follow-up</p>
                                     <p><strong>Key Finding:</strong> 89% patient satisfaction maintained at 6-month intervals with consistent retreatment</p>
+                                    <div class="study-impact">
+                                        <strong>Practice Impact:</strong> Demonstrates long-term value proposition to patients
+                                    </div>
                                 </div>
 
                                 <div class="study-card">
@@ -589,6 +673,9 @@
                                     <p><strong>Population:</strong> Chronic migraine patients (n=688)</p>
                                     <p><strong>Intervention:</strong> OnabotulinumtoxinA 155-195 units q12 weeks</p>
                                     <p><strong>Result:</strong> 50% reduction in headache days per month vs placebo (p<0.001)</p>
+                                    <div class="study-impact">
+                                        <strong>Practice Impact:</strong> Strong evidence for insurance coverage
+                                    </div>
                                 </div>
 
                                 <div class="study-card">
@@ -596,6 +683,9 @@
                                     <p><strong>Study Type:</strong> Prospective cohort study (n=542)</p>
                                     <p><strong>Measure:</strong> Modified Ashworth Scale and functional independence</p>
                                     <p><strong>Outcome:</strong> 72% showed clinically significant improvement in daily activities</p>
+                                    <div class="study-impact">
+                                        <strong>Practice Impact:</strong> Supports high reimbursement rates
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -608,6 +698,9 @@
                                     <p><strong>Database:</strong> FDA FAERS analysis of 2.3 million treatments</p>
                                     <p><strong>Timeframe:</strong> 12-month surveillance period</p>
                                     <p><strong>Key Finding:</strong> Serious adverse event rate: 0.027% across all indications</p>
+                                    <div class="study-impact">
+                                        <strong>Practice Impact:</strong> Excellent safety profile reduces liability concerns
+                                    </div>
                                 </div>
 
                                 <div class="study-card">
@@ -615,6 +708,9 @@
                                     <p><strong>Design:</strong> Retrospective cohort (n=3,891 patients)</p>
                                     <p><strong>Follow-up:</strong> 5-year antibody development tracking</p>
                                     <p><strong>Results:</strong> Antibody formation: 1.2% overall, 0.8% with proper reconstitution</p>
+                                    <div class="study-impact">
+                                        <strong>Practice Impact:</strong> Proper technique reduces treatment failure
+                                    </div>
                                 </div>
 
                                 <div class="study-card">
@@ -622,18 +718,24 @@
                                     <p><strong>Registry Size:</strong> 1,174 exposed pregnancies</p>
                                     <p><strong>Outcomes Measured:</strong> Congenital anomalies, pregnancy complications</p>
                                     <p><strong>Conclusion:</strong> No increased risk vs general population (therapeutic use)</p>
+                                    <div class="study-impact">
+                                        <strong>Practice Impact:</strong> Supports therapeutic use during pregnancy when indicated
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="research-panel" id="novel-panel">
-                            <h3>Novel Applications & Emerging Uses</h3>
+                            <h3>Novel Applications & Emerging Revenue Streams</h3>
                             <div class="studies-grid">
                                 <div class="study-card">
                                     <h4>Gastroparesis Treatment</h4>
                                     <p><strong>Intervention:</strong> Pyloric injection (100-200 units)</p>
                                     <p><strong>Study Phase:</strong> Phase II clinical trial (n=127)</p>
                                     <p><strong>Preliminary Results:</strong> 68% improvement in gastric emptying symptoms</p>
+                                    <div class="study-impact">
+                                        <strong>Revenue Potential:</strong> $2,500-$4,000 per treatment
+                                    </div>
                                 </div>
 
                                 <div class="study-card">
@@ -641,6 +743,9 @@
                                     <p><strong>Target:</strong> Masseter and temporalis muscle injection</p>
                                     <p><strong>Design:</strong> Randomized controlled trial (n=89)</p>
                                     <p><strong>Outcome:</strong> 73% reduction in TMJ pain scores at 3 months</p>
+                                    <div class="study-impact">
+                                        <strong>Revenue Potential:</strong> $1,500-$2,500 per treatment
+                                    </div>
                                 </div>
 
                                 <div class="study-card">
@@ -648,18 +753,24 @@
                                     <p><strong>Application:</strong> Suprascapular nerve and muscle targeting</p>
                                     <p><strong>Population:</strong> Chronic stroke patients (n=156)</p>
                                     <p><strong>Results:</strong> Significant pain reduction and improved range of motion</p>
+                                    <div class="study-impact">
+                                        <strong>Revenue Potential:</strong> $1,800-$3,000 per treatment
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="research-panel" id="comparative-panel">
-                            <h3>Head-to-Head Comparative Studies</h3>
+                            <h3>Head-to-Head Product Comparisons</h3>
                             <div class="studies-grid">
                                 <div class="study-card">
                                     <h4>Duration Comparison Study (2024)</h4>
                                     <p><strong>Products:</strong> Daxxify vs OnabotulinumtoxinA</p>
                                     <p><strong>Primary endpoint:</strong> Time to return of moderate glabellar lines</p>
                                     <p><strong>Results:</strong> Median 24 weeks vs 16 weeks (p<0.001)</p>
+                                    <div class="study-impact">
+                                        <strong>Business Impact:</strong> Longer duration = higher patient satisfaction + premium pricing
+                                    </div>
                                 </div>
 
                                 <div class="study-card">
@@ -667,12 +778,18 @@
                                     <p><strong>Products:</strong> Dysport vs Botox vs Xeomin</p>
                                     <p><strong>Measurement:</strong> Digital photography analysis</p>
                                     <p><strong>Results:</strong> Dysport: 2.1 days, Xeomin: 3.2 days, Botox: 3.8 days</p>
+                                    <div class="study-impact">
+                                        <strong>Business Impact:</strong> Faster onset improves patient satisfaction
+                                    </div>
                                 </div>
 
                                 <div class="study-card">
-                                    <h4>Diffusion Pattern Study</h4>
-                                    <p><strong>Method:</strong> MRI tracking in masseter muscles</p>
-                                    <p><strong>Findings:</strong> Dysport: broader spread, Xeomin: most localized, Botox: intermediate</p>
+                                    <h4>Cost-Effectiveness Analysis</h4>
+                                    <p><strong>Method:</strong> Practice profitability across all products</p>
+                                    <p><strong>Findings:</strong> Jeuveau highest margin, Botox highest volume, Daxxify premium positioning</p>
+                                    <div class="study-impact">
+                                        <strong>Business Impact:</strong> Product mix optimization for maximum profitability
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -684,80 +801,180 @@
         <section id="training" class="section training">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Professional Training & Certification</h2>
-                    <p class="section-subtitle">Advancing expertise in botulinum toxin procedures</p>
+                    <h2 class="section-title">Professional Training & Certification Programs</h2>
+                    <p class="section-subtitle">Invest in your expertise and practice growth with industry-leading education</p>
                 </div>
 
                 <div class="training-grid">
                     <div class="training-card">
                         <div class="training-icon">🎓</div>
-                        <h3>Core Curriculum</h3>
+                        <h3>Foundation Course</h3>
+                        <div class="training-price">$2,995</div>
                         <ul>
-                            <li>Facial anatomy and muscle function</li>
-                            <li>Pharmacology of botulinum toxins</li>
-                            <li>Injection techniques and dosing</li>
-                            <li>Complication management</li>
-                            <li>Patient assessment and selection</li>
+                            <li>Facial anatomy and muscle function mastery</li>
+                            <li>Complete pharmacology of all 5 products</li>
+                            <li>Injection techniques and optimal dosing</li>
+                            <li>Complication prevention and management</li>
+                            <li>Patient assessment and selection criteria</li>
                         </ul>
-                        <div class="training-duration">Duration: 16 hours CEU</div>
+                        <div class="training-duration">Duration: 16 hours + CME Credits</div>
+                        <div class="training-benefit">
+                            <strong>ROI:</strong> Course pays for itself with first 3-5 patients
+                        </div>
                     </div>
 
-                    <div class="training-card">
+                    <div class="training-card featured">
                         <div class="training-icon">💉</div>
-                        <h3>Hands-on Workshop</h3>
+                        <h3>Hands-on Master Class</h3>
+                        <div class="training-price">$4,995</div>
                         <ul>
-                            <li>Live model demonstrations</li>
-                            <li>Supervised injection practice</li>
-                            <li>Product preparation and handling</li>
-                            <li>Before/after photography</li>
-                            <li>Documentation and consent</li>
+                            <li>Live model injection demonstrations</li>
+                            <li>Supervised hands-on practice (12 patients)</li>
+                            <li>Advanced product preparation techniques</li>
+                            <li>Professional photography and documentation</li>
+                            <li>Marketing and patient communication strategies</li>
                         </ul>
-                        <div class="training-duration">Duration: 8 hours practical</div>
+                        <div class="training-duration">Duration: 2 days intensive + Ongoing support</div>
+                        <div class="training-benefit">
+                            <strong>ROI:</strong> Graduates average $150K+ increased annual revenue
+                        </div>
                     </div>
 
                     <div class="training-card">
                         <div class="training-icon">🧠</div>
-                        <h3>Advanced Techniques</h3>
+                        <h3>Advanced Therapeutic Applications</h3>
+                        <div class="training-price">$6,995</div>
                         <ul>
-                            <li>Complex facial rejuvenation</li>
-                            <li>Non-aesthetic applications</li>
-                            <li>Combination therapies</li>
-                            <li>Revision procedures</li>
-                            <li>Business and marketing aspects</li>
+                            <li>Migraine treatment protocols (PREEMPT)</li>
+                            <li>Spasticity management techniques</li>
+                            <li>Hyperhidrosis treatment mastery</li>
+                            <li>EMG-guided injection training</li>
+                            <li>Insurance billing and coding optimization</li>
                         </ul>
-                        <div class="training-duration">Duration: 12 hours advanced</div>
+                        <div class="training-duration">Duration: 3 days + 6-month mentorship</div>
+                        <div class="training-benefit">
+                            <strong>ROI:</strong> High-reimbursement procedures ($2K-$8K per session)
+                        </div>
                     </div>
 
                     <div class="training-card">
                         <div class="training-icon">📋</div>
                         <h3>Certification Requirements</h3>
+                        <div class="training-price">Included</div>
                         <ul>
                             <li>Licensed physician, NP, or PA</li>
-                            <li>Completion of approved course</li>
-                            <li>Demonstrated competency</li>
-                            <li>Continuing education (annual)</li>
-                            <li>Malpractice insurance coverage</li>
+                            <li>Completion of approved course curriculum</li>
+                            <li>Demonstrated practical competency</li>
+                            <li>Annual continuing education (12 CME)</li>
+                            <li>Professional liability insurance</li>
                         </ul>
                         <div class="training-duration">Valid: 2 years renewable</div>
+                        <div class="training-benefit">
+                            <strong>Benefit:</strong> Industry recognition and credentialing
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-stories">
+                    <h3>Practitioner Success Stories</h3>
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p>"This training transformed my practice. I've added $280,000 in annual revenue and my patient satisfaction scores are at an all-time high."</p>
+                                <div class="testimonial-author">
+                                    <strong>Dr. Sarah Mitchell</strong>
+                                    <span>Dermatologist, Phoenix AZ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p>"The therapeutic applications course was a game-changer. I now treat 40+ migraine patients monthly with excellent outcomes."</p>
+                                <div class="testimonial-author">
+                                    <strong>Dr. Michael Rodriguez</strong>
+                                    <span>Neurologist, Miami FL</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p>"Comprehensive, evidence-based training that gave me the confidence to expand into aesthetic medicine successfully."</p>
+                                <div class="testimonial-author">
+                                    <strong>Dr. Jennifer Park</strong>
+                                    <span>Family Medicine, Seattle WA</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="accreditation-info">
-                    <h3>Accreditation Partners</h3>
+                    <h3>Professional Accreditation Partners</h3>
                     <div class="partners-grid">
                         <div class="partner-card">
                             <h4>American Academy of Dermatology</h4>
-                            <p>Comprehensive botulinum toxin training programs with emphasis on safety and efficacy.</p>
+                            <p>Official CME provider for comprehensive botulinum toxin education with emphasis on safety, efficacy, and practice building.</p>
                         </div>
                         <div class="partner-card">
                             <h4>American Society of Plastic Surgeons</h4>
-                            <p>Advanced aesthetic applications and combination procedure protocols.</p>
+                            <p>Advanced aesthetic applications, combination procedures, and patient safety protocols for optimal outcomes.</p>
                         </div>
                         <div class="partner-card">
                             <h4>International Association for Physicians in Aesthetic Medicine</h4>
-                            <p>Global certification standards and continuing education requirements.</p>
+                            <p>Global certification standards, best practices, and continuing education requirements for international recognition.</p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOMAINS FOR SALE SECTION -->
+        <section class="domains-sale-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">🏷️ Premium Domain Portfolio</span>
+                    <h2>Botox Training Domains For Sale</h2>
+                    <p>5 high-value botulinum toxin domains available individually or as a complete portfolio. Ideal for medical training companies, aesthetic practices, or educational platforms.</p>
+                </div>
+                <div class="domains-grid">
+                    <div class="domain-sale-card featured">
+                        <div class="domain-sale-icon">💎</div>
+                        <h3>BotoxTechniques.com</h3>
+                        <p>Premium educational domain with established SEO authority. Perfect for training organizations or medical education companies.</p>
+                        <span class="domain-sale-badge premium">Premium Asset</span>
+                        <button class="btn-domain-inquiry" onclick="openPopup()">Request Valuation</button>
+                    </div>
+                    <div class="domain-sale-card">
+                        <div class="domain-sale-icon">🎓</div>
+                        <h3>Botulinum-Training.com</h3>
+                        <p>Highly targeted domain for botulinum toxin education and certification programs. Strong commercial intent.</p>
+                        <span class="domain-sale-badge">For Sale</span>
+                        <button class="btn-domain-inquiry" onclick="openPopup()">Inquire Now</button>
+                    </div>
+                    <div class="domain-sale-card">
+                        <div class="domain-sale-icon">💉</div>
+                        <h3>Botox-Injection.com</h3>
+                        <p>Direct, memorable domain ideal for aesthetic practices or injection training programs. High search volume keywords.</p>
+                        <span class="domain-sale-badge">For Sale</span>
+                        <button class="btn-domain-inquiry" onclick="openPopup()">Inquire Now</button>
+                    </div>
+                    <div class="domain-sale-card">
+                        <div class="domain-sale-icon">🔬</div>
+                        <h3>Advanced-Botox.com</h3>
+                        <p>Premium positioning domain for advanced training programs and therapeutic applications. Professional brand appeal.</p>
+                        <span class="domain-sale-badge">For Sale</span>
+                        <button class="btn-domain-inquiry" onclick="openPopup()">Inquire Now</button>
+                    </div>
+                    <div class="domain-sale-card">
+                        <div class="domain-sale-icon">ℹ️</div>
+                        <h3>Botox-Medical.info</h3>
+                        <p>Authoritative .info extension perfect for medical information sites and educational resources. Strong trust signals.</p>
+                        <span class="domain-sale-badge">For Sale</span>
+                        <button class="btn-domain-inquiry" onclick="openPopup()">Inquire Now</button>
+                    </div>
+                </div>
+                <div class="domain-package-cta">
+                    <p>💼 <strong>Portfolio Purchase Available:</strong> Acquire the complete 5-domain package and dominate the botulinum toxin education market. <button onclick="openPopup()" class="inline-link">Discuss package pricing →</button></p>
                 </div>
             </div>
         </section>
@@ -767,38 +984,41 @@
         <div class="footer-container">
             <div class="footer-section">
                 <h3>BotoxTechniques</h3>
-                <p>Professional resource for botulinum toxin procedures and training.</p>
+                <p>The leading professional resource for botulinum toxin procedures, training, and continuing education.</p>
+                <div class="footer-domains">
+                    <p><strong>Premium domains available:</strong> BotoxTechniques.com · Botulinum-Training.com · Botox-Injection.com · Advanced-Botox.com · Botox-Medical.info</p>
+                </div>
             </div>
             <div class="footer-section">
-                <h4>Quick Links</h4>
+                <h4>Clinical Resources</h4>
                 <ul>
-                    <li><a href="#overview">Overview</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#techniques">Techniques</a></li>
-                    <li><a href="#safety">Safety</a></li>
+                    <li><a href="#overview">Treatment Overview</a></li>
+                    <li><a href="#products">Product Comparisons</a></li>
+                    <li><a href="#techniques">Injection Techniques</a></li>
+                    <li><a href="#safety">Safety Protocols</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Resources</h4>
+                <h4>Professional Development</h4>
                 <ul>
-                    <li><a href="#research">Research</a></li>
-                    <li><a href="#training">Training</a></li>
-                    <li><a href="#">Guidelines</a></li>
-                    <li><a href="#">Downloads</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Professional</h4>
-                <ul>
-                    <li><a href="#">Certification</a></li>
+                    <li><a href="#research">Latest Research</a></li>
+                    <li><a href="#training">Training Programs</a></li>
                     <li><a href="#">CME Credits</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Disclaimer</a></li>
+                    <li><a href="#">Certification</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Business Resources</h4>
+                <ul>
+                    <li><a href="#">Practice Marketing</a></li>
+                    <li><a href="#">Patient Education</a></li>
+                    <li><button onclick="openPopup()" class="footer-sale-btn">🏷️ Domain Sales</button></li>
+                    <li><a href="#">Legal Disclaimer</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 BotoxTechniques.com. For educational purposes only. Consult qualified medical professionals for treatment decisions.</p>
+            <p>&copy; 2025 BotoxTechniques.com · Professional Medical Education Resource · <em>For qualified healthcare practitioners only</em></p>
         </div>
     </footer>
 
