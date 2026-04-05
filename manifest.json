@@ -1,0 +1,25 @@
+{
+    "name": "BotoxTechniques.com",
+    "short_name": "BotoxTech",
+    "description": "Professional botulinum toxin training and premium medical domain for sale",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#667eea",
+    "orientation": "portrait-primary",
+    "categories": ["medical", "education", "training"],
+    "lang": "en",
+    "scope": "/",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
